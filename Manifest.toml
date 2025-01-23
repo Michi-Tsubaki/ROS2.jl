@@ -2,7 +2,7 @@
 
 julia_version = "1.10.3"
 manifest_format = "2.0"
-project_hash = "6072318052f85d2037fd17c98e31aa67d68a74d6"
+project_hash = "35dde1234f947fc2ddf3c91e4dce1c4dae03c448"
 
 [[deps.Aqua]]
 deps = ["Compat", "Pkg", "Test"]
@@ -117,9 +117,9 @@ version = "2023.1.10"
 
 [[deps.MuJoCo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "042c7704123539f9786ad3e4c2c57b1dfaf122fd"
+git-tree-sha1 = "413b254449c79187a42205707917ff60192f48da"
 uuid = "32af7c3b-80ec-5621-8194-2f6cb2280831"
-version = "3.1.6+0"
+version = "2.3.7+0"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
