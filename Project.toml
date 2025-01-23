@@ -1,0 +1,27 @@
+name = "ROJ"
+uuid = "493365b4-7e18-460b-8b90-ec3e7f80d3eb"
+authors = ["Michi-Tsubaki <michi.tsubaki.tech@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+
+
+[compat]
+Aqua = "0.8.9"
+ReTestItems = "1.29.0"
+Test = "1"
+Example = "0.5"
+MuJoCo_jll = "2"
+StaticArrays = "1"
+julia = "1.11.3"
+
+[extras]
+Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Example = "7876af07-990d-54b4-ab0e-23690620f79a"
+MuJoCo_jll = "32af7c3b-80ec-5621-8194-2f6cb2280831"
+ReTestItems = "817f1d60-ba6b-4fd5-9520-3cf149f6a823"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Aqua", "Test", "ReTestItems"]
