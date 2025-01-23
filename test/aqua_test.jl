@@ -2,6 +2,6 @@
 	using Aqua
 	using ROJ
 	@testset "Aqua" begin
-	  	Aqua.test__all(ROJ)
+	  	Aqua.test_all(ROJ)
 	end
 end
