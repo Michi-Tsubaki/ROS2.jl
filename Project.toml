@@ -1,0 +1,10 @@
+name = "ROJ"
+uuid = "493365b4-7e18-460b-8b90-ec3e7f80d3eb"
+authors = ["Michi-Tsubaki <michi.tsubaki.tech@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Example = "7876af07-990d-54b4-ab0e-23690620f79a"
+MuJoCo_jll = "32af7c3b-80ec-5621-8194-2f6cb2280831"
+ROS = "a492bfac-16cc-4d50-a8b6-f03352b6b563"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
