@@ -13,7 +13,8 @@ MuJoCo_jll = "2"
 ReTestItems = "1.29.0"
 StaticArrays = "1"
 Test = "1"
-julia = "1.11.3"
+julia = "1.10.3"
+PyCall = "1.96.4"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"

@@ -27,7 +27,8 @@ function warn(logger::PyObject, msg::String)
     logger.warn(msg)
 end
 
-function error(logger::PyObject, msg::String)
+# Rename error to log_error to avoid collision
+function log_error(logger::PyObject, msg::String)
     logger.error(msg)
 end
 
@@ -45,7 +46,8 @@ function set_level(logger::PyObject, level::Integer)
     py"set_logger_level"(logger, level)
 end
 
-export get_logger, debug, info, warn, error, fatal, set_level,
+# Export renamed log_error and other functions
+export get_logger, debug, info, warn, log_error, fatal, set_level,
        DEBUG, INFO, WARN, ERROR, FATAL
 
 end # module
