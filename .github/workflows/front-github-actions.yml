@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -6,17 +7,17 @@ on:
     tags: ['*']
   pull_request:
   workflow_dispatch:
+
 concurrency:
-  # Skip intermediate builds: always.
-  # Cancel intermediate builds: only if it is a pull request build.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
 jobs:
   test:
     name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }} - ${{ github.event_name }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
-    permissions: # needed to allow julia-actions/cache to proactively delete old caches that it has created
+    permissions:
       actions: write
       contents: read
     strategy:
@@ -26,15 +27,76 @@ jobs:
           - 'lts'
           - '1'
         os:
-          - ubuntu-latest
+          - ubuntu-22.04
         arch:
           - x64
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v2
+      # Checkout the code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Set up Julia environment
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
-      - uses: julia-actions/cache@v2
-      - uses: julia-actions/julia-buildpkg@v1
-      - uses: julia-actions/julia-runtest@v1
+
+      # Cache Julia dependencies
+      - name: Cache Julia Dependencies
+        uses: julia-actions/cache@v2
+
+      # Set up ROS 2 
+      - name: Set up ROS 2 Humble
+        run: |
+          # Add ROS 2 repository
+          sudo apt update
+          sudo apt install -y curl gnupg lsb-release
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
+          
+          # Install ROS 2 
+          sudo apt update
+          sudo apt install -y ros-humble-desktop
+
+      # Install ROS dependencies
+      - name: Install ROS Dependencies
+        run: |
+          sudo apt install -y \
+            python3-colcon-common-extensions \
+            python3-rosdep \
+            python3-vcstool
+
+      # Initialize rosdep
+      - name: Initialize rosdep
+        run: |
+          sudo rosdep init
+          rosdep update
+
+      # Prepare ROS environment
+      - name: Prepare ROS Environment
+        run: |
+          # Create a script to source ROS setup
+          echo '#!/bin/bash
+          source /opt/ros/humble/setup.bash' > $GITHUB_WORKSPACE/ros_setup.sh
+          chmod +x $GITHUB_WORKSPACE/ros_setup.sh
+
+      # Run tests with ROS environment
+      - name: Run Tests
+        run: |
+          $GITHUB_WORKSPACE/ros_setup.sh
+          source /opt/ros/humble/setup.bash
+          julia --project=. -e 'using Pkg; Pkg.test()'
+        shell: bash
+
+      # Optional: Upload coverage
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+        if: success()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
