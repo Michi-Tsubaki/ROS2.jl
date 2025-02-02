@@ -30,9 +30,6 @@ jobs:
           - ubuntu-22.04
         arch:
           - x64
-        include:
-          - os: ubuntu-22.04
-            ros-distro: humble
 
     steps:
       # Checkout the code
@@ -51,20 +48,17 @@ jobs:
         uses: julia-actions/cache@v2
 
       # Set up ROS 2 
-      - name: Set up ROS 2 ${{ matrix.ros-distro }}
+      - name: Set up ROS 2 Humble
         run: |
           # Add ROS 2 repository
           sudo apt update
           sudo apt install -y curl gnupg lsb-release
-          curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
           sudo sh -c 'echo "deb [arch=amd64] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
           
           # Install ROS 2 
           sudo apt update
-          sudo apt install -y ros-${{ matrix.ros-distro }}-desktop
-          
-          # Set up environment
-          echo "source /opt/ros/${{ matrix.ros-distro }}/setup.bash" >> $GITHUB_ENV
+          sudo apt install -y ros-humble-desktop
 
       # Install ROS dependencies
       - name: Install ROS Dependencies
@@ -73,25 +67,25 @@ jobs:
             python3-colcon-common-extensions \
             python3-rosdep \
             python3-vcstool
-          
-          # Initialize rosdep
+
+      # Initialize rosdep
+      - name: Initialize rosdep
+        run: |
           sudo rosdep init
           rosdep update
 
-      # Prepare Julia environment with ROS dependencies
-      - name: Prepare Julia Environment
+      # Prepare ROS environment
+      - name: Prepare ROS Environment
         run: |
-          julia -e '
-            using Pkg
-            Pkg.add(["ROS", "PyCall"])
-            Pkg.build(["ROS", "PyCall"])
-          '
-        shell: bash
+          # Create a script to source ROS setup
+          echo '#!/bin/bash
+          source /opt/ros/humble/setup.bash' > $GITHUB_WORKSPACE/ros_setup.sh
+          chmod +x $GITHUB_WORKSPACE/ros_setup.sh
 
-      # Run tests
+      # Run tests with ROS environment
       - name: Run Tests
         run: |
-          source $GITHUB_ENV
+          $GITHUB_WORKSPACE/ros_setup.sh
           julia --project=. -e 'using Pkg; Pkg.test()'
         shell: bash
 
