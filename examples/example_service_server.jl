@@ -3,10 +3,9 @@
 using ROJ
 using PyCall
 
-function add_service_callback(request, response)  # response引数を追加
+function add_service_callback(request, response)
     println("Received request: a=$(request.a), b=$(request.b)")
     
-    # 既に作成されたレスポンスオブジェクトを使用
     response.sum = request.a + request.b
     
     println("Sending response: sum=$(response.sum)")
