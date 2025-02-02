@@ -43,16 +43,16 @@ jobs:
       # Cache Julia dependencies
       - uses: julia-actions/cache@v2
 
-      # Install ROS 2 Humble
-      - name: Set up ROS 2 Humble
+      # Install ROS 2 jammy
+      - name: Set up ROS 2 jammy
         run: |
           sudo apt update
           sudo apt install -y curl gnupg lsb-release
           curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/rosdep.key | sudo tee /etc/apt/trusted.gpg.d/ros.asc
           sudo apt update
-          sudo apt install -y ros-humble-desktop
-          source /opt/ros/humble/setup.bash
-          echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+          sudo apt install -y ros-jammy-desktop
+          source /opt/ros/jammy/setup.bash
+          echo "source /opt/ros/jammy/setup.bash" >> ~/.bashrc
           source ~/.bashrc
 
       # Set up ROS dependencies
