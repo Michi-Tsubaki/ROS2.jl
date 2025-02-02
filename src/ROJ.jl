@@ -2,47 +2,37 @@ module ROJ
 
 using PyCall
 
-#Empty imported modules for valid precompilation
-const _py_sys = PyCall.PyNULL()
-const _py_ros_callbacks = PyCall.PyNULL()
-const __rclpy__ = PyCall.PyNULL()
-
-include("debug.jl")
-include("time.jl")
-include("gentypes.jl")
-include("rclpy.jl")
+# Include submodules
+include("core.jl")
 include("pubsub.jl")
-include("services.jl")
-include("callbacks.jl")
+include("timer.jl")
+include("service.jl")
+include("parameter.jl")
+include("action.jl")
+include("logging.jl")
 
-function __init__()
-    #Put julia's ARGS into python's so remappings will work
-    copy!(_py_sys, pyimport("sys"))
-    if length(ARGS) > 0
-        _py_sys.argv = ARGS
-    end
+# Re-export from submodules
+using .Core
+using .PubSub
+using .Timer
+using .Service
+using .Parameter
+using .Action
+using .Logging
 
-    #Fill in empty PyObjects
-    if ! (dirname(@__FILE__) in _py_sys."path")
-        pushfirst!(_py_sys."path", dirname(@__FILE__))
-    end
-    copy!(_py_ros_callbacks, pyimport("ros_callbacks"))
+# Export all symbols from submodules
+export ROSNode, init, shutdown, spin, spin_once, is_ok,  # from Core
+       Publisher, Subscriber, create_msg, publish,  # from PubSub
+       ROSTimer, cancel, reset, is_ready, time_since_last_call,  # from Timer
+       ServiceServer, ServiceClient, create_request, call, call_async,  # from Service
+       wait_for_service, service_is_ready,
+       declare_parameter, declare_parameters, get_parameter, set_parameter,  # from Parameter
+       has_parameter, get_parameter_types,
+       add_on_set_parameters_callback, remove_on_set_parameters_callback,
+       ActionServer, ActionClient, GoalHandle, send_goal, send_goal_sync,  # from Action
+       cancel_goal, create_goal, accept_goal, reject_goal,
+       publish_feedback, succeed, abort,
+       get_logger, debug, info, warn, error, fatal, set_level,  # from Logging
+       DEBUG, INFO, WARN, ERROR, FATAL
 
-    try
-        copy!(__rclpy__, pyimport("rclpy"))
-    catch ex
-        if (isa(ex, PyCall.PyError) && ex.T.__name__ == "ModuleNotFoundError")
-            @error """
-                Unable to load the 'rospy' python package!
-                Has an environment setup script been run?
-                """
-        else
-            rethrow(ex)
-        end
-    end
-
-    #Compile the callback notify function, see callbacks.jl
-    CB_NOTIFY_PTR[] = @cfunction(_callback_notify, Cint, (Ptr{Cvoid},))
-end
-
-end # module ROJ
+end # module
