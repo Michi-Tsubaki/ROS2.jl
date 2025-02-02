@@ -86,6 +86,7 @@ jobs:
       - name: Run Tests
         run: |
           $GITHUB_WORKSPACE/ros_setup.sh
+          source /opt/ros/humble/setup.bash
           julia --project=. -e 'using Pkg; Pkg.test()'
         shell: bash
 
