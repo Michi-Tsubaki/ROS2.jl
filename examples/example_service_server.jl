@@ -1,6 +1,6 @@
 #!/usr/bin/env julia
 # example_service_server.jl
-using RobotOperatingClient
+using ROS2
 using PyCall
 
 function add_service_callback(request, response)

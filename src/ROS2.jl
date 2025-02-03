@@ -1,6 +1,38 @@
-module RobotOperatingClient
-
+module ROS2
 using PyCall
+
+const rclpy = PyNULL()
+const rclpy_node = PyNULL()
+
+function __init__()
+    try
+        # Check ROS2 environment
+        if !haskey(ENV, "AMENT_PREFIX_PATH")
+            error("ROS2 environment not sourced. Please run 'source /opt/ros/\$ROS_DISTRO/setup.bash' first")
+        end
+        
+        # Get Python executable path
+        python_path = PyCall.python
+        
+        # Add ROS2 Python path
+        ros_python_path = "/opt/ros/jazzy/lib/python3.12/site-packages"
+        py"""
+        import sys
+        ros_path = $ros_python_path
+        if ros_path not in sys.path:
+            sys.path.insert(0, ros_path)
+        """
+        
+        # Import rclpy
+        copy!(rclpy, pyimport("rclpy"))
+        copy!(rclpy_node, pyimport("rclpy.node"))
+    catch e
+        println("Error during ROS2 initialization: ", e)
+        println("Exception type: ", typeof(e))
+        println("Stacktrace: ", stacktrace())
+        rethrow(e)
+    end
+end
 
 # Include submodules
 include("core.jl")

@@ -2,7 +2,7 @@
 # simple_publisher.jl
 # description: sample publishing code
 
-using RobotOperatingClient
+using ROS2
 
 function main()
     # Creating node

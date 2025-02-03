@@ -1,15 +1,15 @@
 using Test
-using RobotOperatingClient
+using ROS2
 using PyCall
 
 # @testset "Package Tests" begin
 #     @testset "Core Functionality" begin
-#         @test isdefined(RobotOperatingClient, :ROSNode)
-#         @test isdefined(RobotOperatingClient, :Publisher)
-#         @test isdefined(RobotOperatingClient, :Subscriber)
-#         @test isdefined(RobotOperatingClient, :ServiceServer)
-#         @test isdefined(RobotOperatingClient, :ServiceClient)
-#         @test isdefined(RobotOperatingClient, :ROSTimer)
+#         @test isdefined(ROS2, :ROSNode)
+#         @test isdefined(ROS2, :Publisher)
+#         @test isdefined(ROS2, :Subscriber)
+#         @test isdefined(ROS2, :ServiceServer)
+#         @test isdefined(ROS2, :ServiceClient)
+#         @test isdefined(ROS2, :ROSTimer)
 #     end
 
 #     @testset "Python Environment" begin

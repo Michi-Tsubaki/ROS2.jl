@@ -1,9 +1,9 @@
 using Test
 using Aqua
-using RobotOperatingClient
+using ROS2
 
 @testset "Aqua.jl Quality Tests" begin
-    Aqua.test_all(RobotOperatingClient;
+    Aqua.test_all(ROS2;
         ambiguities=false,  # 多重ディスパッチの曖昧さをチェック
         unbound_args=true,  # 未束縛の型パラメータをチェック
         undefined_exports=true,  # 未定義のエクスポートをチェック

@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 # example_service_client.jl
 
-using RobotOperatingClient
+using ROS2
 
 function main()
     println("Creating node...")

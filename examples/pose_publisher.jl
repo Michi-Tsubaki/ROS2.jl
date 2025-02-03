@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 
 # pose_publisher.jl
-using RobotOperatingClient
+using ROS2
 
 function main()
     # Creating node

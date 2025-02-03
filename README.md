@@ -1,6 +1,6 @@
-# RobotOperatingClient.jl
+# ROS2.jl
 
-RobotOperatingClient (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy). It provides a Julia-friendly interface for ROS2 functionality while leveraging the robust features of rclpy.
+ROS2 (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy). It provides a Julia-friendly interface for ROS2 functionality while leveraging the robust features of rclpy.
 
 [日本語のREADMEはこちら](#rojjl-1)
 
@@ -31,7 +31,7 @@ RobotOperatingClient (ROS2 on Julia) is a Julia wrapper for ROS2's Python client
 
 ### Version Compatibility
 
-| RobotOperatingClient.jl Version | ROS2 Version | Julia Version | Python Version |
+| ROS2.jl Version | ROS2 Version | Julia Version | Python Version |
 |----------------|--------------|---------------|----------------|
 | 0.1.x          | Jazzy        | 1.10+        | 3.12          |
 
@@ -42,10 +42,10 @@ RobotOperatingClient (ROS2 on Julia) is a Julia wrapper for ROS2's Python client
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. Install RobotOperatingClient.jl:
+2. Install ROS2.jl:
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/RobotOperatingClient.jl")
+Pkg.add(url="https://github.com/your-username/ROS2.jl")
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ Pkg.add(url="https://github.com/your-username/RobotOperatingClient.jl")
 ### Basic Example
 
 ```julia
-using RobotOperatingClient
+using ROS2
 
 # Create a node
 node = ROSNode("example_node")
@@ -100,21 +100,21 @@ Check the `examples/` directory for more detailed examples:
 
 ## Notes
 
-1. Always source ROS2 environment before using RobotOperatingClient:
+1. Always source ROS2 environment before using ROS2:
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. When using RobotOperatingClient in a ROS2 package:
-   - Add RobotOperatingClient as a dependency in your package.xml
+2. When using ROS2 in a ROS2 package:
+   - Add ROS2 as a dependency in your package.xml
    - Configure your CMakeLists.txt to include Julia files
    - Run `colcon build` to build your package
 
-3. RobotOperatingClient requires Python with rclpy installed and properly configured
+3. ROS2 requires Python with rclpy installed and properly configured
 
 ## Contributing
 
-We warmly welcome contributions to RobotOperatingClient.jl! Whether it's bug fixes, new features, documentation improvements, or example code, your help is appreciated.
+We warmly welcome contributions to ROS2.jl! Whether it's bug fixes, new features, documentation improvements, or example code, your help is appreciated.
 
 ### Ways to Contribute
 
@@ -152,8 +152,8 @@ We warmly welcome contributions to RobotOperatingClient.jl! Whether it's bug fix
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/RobotOperatingClient.jl
-cd RobotOperatingClient.jl
+git clone https://github.com/your-username/ROS2.jl
+cd ROS2.jl
 
 # Add the package in development mode
 julia -e 'using Pkg; Pkg.develop(path=".")'
@@ -179,9 +179,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-# RobotOperatingClient.jl
+# ROS2.jl
 
-RobotOperatingClient (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy）のJuliaラッパーです。rclpyの堅牢な機能を活用しながら、JuliaフレンドリーなインターフェースでROS2の機能を提供します。
+ROS2 (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy）のJuliaラッパーです。rclpyの堅牢な機能を活用しながら、JuliaフレンドリーなインターフェースでROS2の機能を提供します。
 
 ## 機能
 
@@ -210,7 +210,7 @@ RobotOperatingClient (ROS2 on Julia)は、ROS2のPythonクライアントライ�
 
 ### バージョン互換性
 
-| RobotOperatingClient.jl バージョン | ROS2 バージョン | Julia バージョン | Python バージョン |
+| ROS2.jl バージョン | ROS2 バージョン | Julia バージョン | Python バージョン |
 |------------------|----------------|-----------------|------------------|
 | 0.1.x            | Jazzy          | 1.10以上        | 3.12            |
 
@@ -221,10 +221,10 @@ RobotOperatingClient (ROS2 on Julia)は、ROS2のPythonクライアントライ�
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. RobotOperatingClient.jlのインストール：
+2. ROS2.jlのインストール：
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/RobotOperatingClient.jl")
+Pkg.add(url="https://github.com/your-username/ROS2.jl")
 ```
 
 ## 使用方法
@@ -232,7 +232,7 @@ Pkg.add(url="https://github.com/your-username/RobotOperatingClient.jl")
 ### 基本例
 
 ```julia
-using RobotOperatingClient
+using ROS2
 
 # ノードの作成
 node = ROSNode("example_node")
@@ -279,21 +279,21 @@ end
 
 ## 注意点
 
-1. RobotOperatingClientを使用する前に必ずROS2環境を読み込んでください：
+1. ROS2を使用する前に必ずROS2環境を読み込んでください：
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. ROS2パッケージでRobotOperatingClientを使用する場合：
-   - package.xmlにRobotOperatingClientを依存関係として追加
+2. ROS2パッケージでROS2を使用する場合：
+   - package.xmlにROS2を依存関係として追加
    - CMakeLists.txtでJuliaファイルを含むように設定
    - `colcon build`でパッケージをビルド
 
-3. RobotOperatingClientには、rclpyがインストールされ、適切に設定されたPythonが必要です
+3. ROS2には、rclpyがインストールされ、適切に設定されたPythonが必要です
 
 ## 貢献について
 
-RobotOperatingClient.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメントの改善、サンプルコードなど、あらゆる形の協力を感謝します。
+ROS2.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメントの改善、サンプルコードなど、あらゆる形の協力を感謝します。
 
 ### 貢献の方法
 
@@ -331,8 +331,8 @@ RobotOperatingClient.jlへの貢献を歓迎します！バグ修正、新機能
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/RobotOperatingClient.jl
-cd RobotOperatingClient.jl
+git clone https://github.com/your-username/ROS2.jl
+cd ROS2.jl
 
 # パッケージを開発モードで追加
 julia -e 'using Pkg; Pkg.develop(path=".")'

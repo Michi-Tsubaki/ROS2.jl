@@ -1,5 +1,5 @@
 using Test
-using RobotOperatingClient
+using ROS2
 
 @testset "Communication Tests" begin
     @testset "Publisher/Subscriber" begin
