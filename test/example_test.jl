@@ -1,5 +1,5 @@
 using Test
-using RobotJuliaClient
+using RobotOperatingClient
 
 @testset "Communication Tests" begin
     @testset "Publisher/Subscriber" begin

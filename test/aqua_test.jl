@@ -1,9 +1,9 @@
 using Test
 using Aqua
-using RobotJuliaClient
+using RobotOperatingClient
 
 @testset "Aqua.jl Quality Tests" begin
-    Aqua.test_all(RobotJuliaClient;
+    Aqua.test_all(RobotOperatingClient;
         ambiguities=false,  # 多重ディスパッチの曖昧さをチェック
         unbound_args=true,  # 未束縛の型パラメータをチェック
         undefined_exports=true,  # 未定義のエクスポートをチェック

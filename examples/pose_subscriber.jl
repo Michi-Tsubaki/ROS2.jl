@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 
 # pose_subscriber.jl
-using RobotJuliaClient
+using RobotOperatingClient
 
 function int_callback(msg)
     println("Received counter: $(msg.data)")

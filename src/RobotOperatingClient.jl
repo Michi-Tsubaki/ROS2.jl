@@ -1,4 +1,4 @@
-module RobotJuliaClient
+module RobotOperatingClient
 
 using PyCall
 

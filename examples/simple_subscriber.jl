@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 # simple_subscriber.jl
 # description : sample subscription code
-using RobotJuliaClient
+using RobotOperatingClient
 
 function callback(msg)
     println("Subscribed: ", msg.data)
