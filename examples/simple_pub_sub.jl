@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 
 # simple_pub_sub.jl
-using ROJ
+using RobotJuliaClient
 
 function main()
     # Creating node

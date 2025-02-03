@@ -2,7 +2,7 @@
 # simple_publisher.jl
 # description: sample publishing code
 
-using ROJ
+using RobotJuliaClient
 
 function main()
     # Creating node

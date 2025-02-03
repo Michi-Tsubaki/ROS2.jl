@@ -33,7 +33,7 @@ function __init__()
         copy!(rclpy, pyimport("rclpy"))
         copy!(rclpy_node, pyimport("rclpy.node"))
     catch e
-        println("Error during ROJ initialization: ", e)
+        println("Error during RobotJuliaClient initialization: ", e)
         println("Exception type: ", typeof(e))
         println("Stacktrace: ", stacktrace())
         rethrow(e)

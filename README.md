@@ -1,6 +1,6 @@
-# ROJ.jl
+# RobotJuliaClient.jl
 
-ROJ (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy). It provides a Julia-friendly interface for ROS2 functionality while leveraging the robust features of rclpy.
+RobotJuliaClient (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy). It provides a Julia-friendly interface for ROS2 functionality while leveraging the robust features of rclpy.
 
 [日本語のREADMEはこちら](#rojjl-1)
 
@@ -31,7 +31,7 @@ ROJ (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy).
 
 ### Version Compatibility
 
-| ROJ.jl Version | ROS2 Version | Julia Version | Python Version |
+| RobotJuliaClient.jl Version | ROS2 Version | Julia Version | Python Version |
 |----------------|--------------|---------------|----------------|
 | 0.1.x          | Jazzy        | 1.10+        | 3.12          |
 
@@ -42,10 +42,10 @@ ROJ (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy).
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. Install ROJ.jl:
+2. Install RobotJuliaClient.jl:
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/ROJ.jl")
+Pkg.add(url="https://github.com/your-username/RobotJuliaClient.jl")
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ Pkg.add(url="https://github.com/your-username/ROJ.jl")
 ### Basic Example
 
 ```julia
-using ROJ
+using RobotJuliaClient
 
 # Create a node
 node = ROSNode("example_node")
@@ -100,21 +100,21 @@ Check the `examples/` directory for more detailed examples:
 
 ## Notes
 
-1. Always source ROS2 environment before using ROJ:
+1. Always source ROS2 environment before using RobotJuliaClient:
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. When using ROJ in a ROS2 package:
-   - Add ROJ as a dependency in your package.xml
+2. When using RobotJuliaClient in a ROS2 package:
+   - Add RobotJuliaClient as a dependency in your package.xml
    - Configure your CMakeLists.txt to include Julia files
    - Run `colcon build` to build your package
 
-3. ROJ requires Python with rclpy installed and properly configured
+3. RobotJuliaClient requires Python with rclpy installed and properly configured
 
 ## Contributing
 
-We warmly welcome contributions to ROJ.jl! Whether it's bug fixes, new features, documentation improvements, or example code, your help is appreciated.
+We warmly welcome contributions to RobotJuliaClient.jl! Whether it's bug fixes, new features, documentation improvements, or example code, your help is appreciated.
 
 ### Ways to Contribute
 
@@ -152,8 +152,8 @@ We warmly welcome contributions to ROJ.jl! Whether it's bug fixes, new features,
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ROJ.jl
-cd ROJ.jl
+git clone https://github.com/your-username/RobotJuliaClient.jl
+cd RobotJuliaClient.jl
 
 # Add the package in development mode
 julia -e 'using Pkg; Pkg.develop(path=".")'
@@ -179,9 +179,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-# ROJ.jl
+# RobotJuliaClient.jl
 
-ROJ (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy）のJuliaラッパーです。rclpyの堅牢な機能を活用しながら、JuliaフレンドリーなインターフェースでROS2の機能を提供します。
+RobotJuliaClient (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy）のJuliaラッパーです。rclpyの堅牢な機能を活用しながら、JuliaフレンドリーなインターフェースでROS2の機能を提供します。
 
 ## 機能
 
@@ -210,7 +210,7 @@ ROJ (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy�
 
 ### バージョン互換性
 
-| ROJ.jl バージョン | ROS2 バージョン | Julia バージョン | Python バージョン |
+| RobotJuliaClient.jl バージョン | ROS2 バージョン | Julia バージョン | Python バージョン |
 |------------------|----------------|-----------------|------------------|
 | 0.1.x            | Jazzy          | 1.10以上        | 3.12            |
 
@@ -221,10 +221,10 @@ ROJ (ROS2 on Julia)は、ROS2のPythonクライアントライブラリ（rclpy�
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. ROJ.jlのインストール：
+2. RobotJuliaClient.jlのインストール：
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/ROJ.jl")
+Pkg.add(url="https://github.com/your-username/RobotJuliaClient.jl")
 ```
 
 ## 使用方法
@@ -232,7 +232,7 @@ Pkg.add(url="https://github.com/your-username/ROJ.jl")
 ### 基本例
 
 ```julia
-using ROJ
+using RobotJuliaClient
 
 # ノードの作成
 node = ROSNode("example_node")
@@ -279,21 +279,21 @@ end
 
 ## 注意点
 
-1. ROJを使用する前に必ずROS2環境を読み込んでください：
+1. RobotJuliaClientを使用する前に必ずROS2環境を読み込んでください：
 ```bash
 source /opt/ros/$ROS_DISTRO/setup.bash
 ```
 
-2. ROS2パッケージでROJを使用する場合：
-   - package.xmlにROJを依存関係として追加
+2. ROS2パッケージでRobotJuliaClientを使用する場合：
+   - package.xmlにRobotJuliaClientを依存関係として追加
    - CMakeLists.txtでJuliaファイルを含むように設定
    - `colcon build`でパッケージをビルド
 
-3. ROJには、rclpyがインストールされ、適切に設定されたPythonが必要です
+3. RobotJuliaClientには、rclpyがインストールされ、適切に設定されたPythonが必要です
 
 ## 貢献について
 
-ROJ.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメントの改善、サンプルコードなど、あらゆる形の協力を感謝します。
+RobotJuliaClient.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメントの改善、サンプルコードなど、あらゆる形の協力を感謝します。
 
 ### 貢献の方法
 
@@ -331,8 +331,8 @@ ROJ.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメ�
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/ROJ.jl
-cd ROJ.jl
+git clone https://github.com/your-username/RobotJuliaClient.jl
+cd RobotJuliaClient.jl
 
 # パッケージを開発モードで追加
 julia -e 'using Pkg; Pkg.develop(path=".")'

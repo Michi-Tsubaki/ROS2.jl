@@ -1,15 +1,15 @@
 using Test
-using ROJ
+using RobotJuliaClient
 using PyCall
 
 # @testset "Package Tests" begin
 #     @testset "Core Functionality" begin
-#         @test isdefined(ROJ, :ROSNode)
-#         @test isdefined(ROJ, :Publisher)
-#         @test isdefined(ROJ, :Subscriber)
-#         @test isdefined(ROJ, :ServiceServer)
-#         @test isdefined(ROJ, :ServiceClient)
-#         @test isdefined(ROJ, :ROSTimer)
+#         @test isdefined(RobotJuliaClient, :ROSNode)
+#         @test isdefined(RobotJuliaClient, :Publisher)
+#         @test isdefined(RobotJuliaClient, :Subscriber)
+#         @test isdefined(RobotJuliaClient, :ServiceServer)
+#         @test isdefined(RobotJuliaClient, :ServiceClient)
+#         @test isdefined(RobotJuliaClient, :ROSTimer)
 #     end
 
 #     @testset "Python Environment" begin
