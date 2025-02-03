@@ -33,51 +33,17 @@ jobs:
 
     steps:
       # Checkout the code
-<<<<<<< HEAD
-      - uses: actions/checkout@v4
-
-      # Set up Julia environment
-      - uses: julia-actions/setup-julia@v2
-=======
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       # Set up Julia environment
       - name: Set up Julia
         uses: julia-actions/setup-julia@v2
->>>>>>> d4d7d0ab4d7100c8169284283778f3267f5f96fa
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
 
       # Cache Julia dependencies
-<<<<<<< HEAD
-      - uses: julia-actions/cache@v2
-
-      # Install ROS 2 Humble
-      - name: Set up ROS 2 Humble
-        run: |
-          sudo apt update
-          sudo apt install -y curl gnupg lsb-release
-          curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/rosdep.key | sudo tee /etc/apt/trusted.gpg.d/ros.asc
-          sudo apt update
-          sudo apt install -y ros-jazzy-desktop
-          source /opt/ros/humble/setup.bash
-          echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
-          source ~/.bashrc
-
-      # Set up ROS dependencies
-      - name: Install ROS dependencies
-        run: |
-          sudo apt install -y python3-colcon-common-extensions
-          sudo apt install -y python3-pip
-          pip3 install -U setuptools
-          pip3 install colcon-common-extensions
-
-      # Run tests
-      - name: Run tests
-        uses: julia-actions/julia-runtest@v1
-=======
       - name: Cache Julia Dependencies
         uses: julia-actions/cache@v2
 
@@ -120,6 +86,7 @@ jobs:
       - name: Run Tests
         run: |
           $GITHUB_WORKSPACE/ros_setup.sh
+          source /opt/ros/humble/setup.bash
           julia --project=. -e 'using Pkg; Pkg.test()'
         shell: bash
 
@@ -133,4 +100,3 @@ jobs:
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
->>>>>>> d4d7d0ab4d7100c8169284283778f3267f5f96fa
