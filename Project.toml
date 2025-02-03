@@ -1,7 +1,7 @@
 name = "RobotOperatingClient"
 uuid = "493365b4-7e18-460b-8b90-ec3e7f80d3eb"
 authors = ["Michi-Tsubaki <michi.tsubaki.tech@gmail.com>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
