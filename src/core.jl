@@ -3,27 +3,42 @@ module Core
 using PyCall
 
 # Global variables to store Python modules
+# Global variables to store Python modules
 const rclpy = PyNULL()
 const rclpy_node = PyNULL()
+const py_sys = PyNULL()
 
 function __init__()
     if contains(lowercase(get(ENV, "GITHUB_WORKFLOW", "")), "automerge")
         return
     end
-
+        
     try
+        copy!(py_sys, pyimport("sys"))
+        if length(ARGS) > 0
+            py_sys.argv = ARGS
+        end
+        
+        if !(dirname(@__FILE__) in py_sys."path")
+            pushfirst!(py_sys."path", dirname(@__FILE__))
+        end
+        
         if !haskey(ENV, "AMENT_PREFIX_PATH")
             @warn "ROS2 environment not sourced"
             return
         end
-
-        # Import rclpy and node
-        py_sys = pyimport("sys")
-        ros_python_path = "/opt/ros/humble/lib/python3.10/site-packages"
         
-        if ros_python_path not in py_sys."path"
-            pushfirst!(py_sys."path", ros_python_path)
-        end
+        # Get Python executable path
+        python_path = PyCall.python
+        
+        # Add ROS2 Python path
+        ros_python_path = "/opt/ros/jazzy/lib/python3.12/site-packages"
+        py"""
+        import sys
+        ros_path = $ros_python_path
+        if ros_path not in sys.path:
+            sys.path.insert(0, ros_path)
+        """
         
         copy!(rclpy, pyimport("rclpy"))
         copy!(rclpy_node, pyimport("rclpy.node"))
