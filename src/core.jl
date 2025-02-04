@@ -40,9 +40,9 @@ function __init__()
             sys.path.insert(0, ros_path)
         """
         
-        # Import rclpy
         copy!(rclpy, pyimport("rclpy"))
         copy!(rclpy_node, pyimport("rclpy.node"))
+        
     catch e
         @warn "ROS2 initialization deferred: $e"
     end
