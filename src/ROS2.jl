@@ -1,9 +1,8 @@
-__precompile__(false)
 module ROS2
 using PyCall
-
 const rclpy = PyNULL()
 const rclpy_node = PyNULL()
+const py_sys = PyNULL()
 
 function __init__()
     if contains(lowercase(get(ENV, "GITHUB_WORKFLOW", "")), "automerge")
@@ -11,18 +10,15 @@ function __init__()
     end
     
     try
-        # Setup Python sys path
-        py_sys = pyimport("sys")
+        copy!(py_sys, pyimport("sys"))
         if length(ARGS) > 0
             py_sys.argv = ARGS
         end
         
-        # Add current directory to Python path
         if !(dirname(@__FILE__) in py_sys."path")
             pushfirst!(py_sys."path", dirname(@__FILE__))
         end
         
-        # Import ROS2 Python modules
         copy!(rclpy, pyimport_conda("rclpy", "rclpy", "conda-forge"))
         
         if !haskey(ENV, "AMENT_PREFIX_PATH")
@@ -31,9 +27,6 @@ function __init__()
         end
         
         copy!(rclpy_node, pyimport("rclpy.node"))
-        
-        # Setup callbacks if needed
-        # CB_NOTIFY_PTR[] = @cfunction(_callback_notify, Cint, (Ptr{Cvoid},))
         
     catch e
         @warn "ROS2 initialization deferred: $e"
