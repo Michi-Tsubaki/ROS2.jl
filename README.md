@@ -45,7 +45,7 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 2. Install ROS2.jl:
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/ROS2.jl")
+Pkg.add(url="https://github.com/Michi-Tsubaki/ROS2.jl")
 ```
 
 ## Usage
@@ -152,7 +152,7 @@ We warmly welcome contributions to ROS2.jl! Whether it's bug fixes, new features
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ROS2.jl
+git clone https://github.com/Michi-Tsubaki/ROS2.jl
 cd ROS2.jl
 
 # Add the package in development mode
@@ -224,7 +224,7 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 2. ROS2.jlのインストール：
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/your-username/ROS2.jl")
+Pkg.add(url="https://github.com/Michi-Tsubaki/ROS2.jl")
 ```
 
 ## 使用方法
@@ -331,7 +331,7 @@ ROS2.jlへの貢献を歓迎します！バグ修正、新機能、ドキュメ�
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/ROS2.jl
+git clone https://github.com/Michi-Tsubaki/ROS2.jl
 cd ROS2.jl
 
 # パッケージを開発モードで追加
