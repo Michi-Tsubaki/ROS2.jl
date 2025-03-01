@@ -1,5 +1,7 @@
 # ROS2.jl
 
+[![pkgeval](https://juliahub.com/docs/General/ROS2/stable/pkgeval.svg)](https://juliahub.com/ui/Packages/General/ROS2)
+
 ROS2 (ROS2 on Julia) is a Julia wrapper for ROS2's Python client library (rclpy). It provides a Julia-friendly interface for ROS2 functionality while leveraging the robust features of rclpy.
 
 [日本語のREADMEはこちら](#rojjl-1)
