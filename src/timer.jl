@@ -5,9 +5,13 @@ using ..Core
 
 mutable struct ROSTimer
     pytimer::PyObject
-    
-    function ROSTimer(node::ROSNode, period::Float64, callback::Function; 
-                     callback_group=nothing)
+
+    function ROSTimer(
+        node::ROSNode,
+        period::Float64,
+        callback::Function;
+        callback_group = nothing,
+    )
         py"""
         def create_timer(node, period, callback, callback_group=None):
             timer = node.create_timer(period, callback, callback_group=callback_group)
