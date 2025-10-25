@@ -12,6 +12,7 @@ include("service.jl")
 include("parameter.jl")
 include("action.jl")
 include("logging.jl")
+include("tf2.jl")
 
 function __init__()
     if contains(lowercase(get(ENV, "GITHUB_WORKFLOW", "")), "automerge")
@@ -38,6 +39,7 @@ function __init__()
         copy!(rclpy_node, pyimport("rclpy.node"))
 
         Time.__init_time__()
+        TF2.__init_tf2__()
 
     catch e
         @warn "ROS2 initialization deferred: $e"
@@ -52,6 +54,7 @@ using .Service
 using .Parameter
 using .Action
 using .Logging
+using .TF2
 
 export ROSNode,
     init,
@@ -113,11 +116,19 @@ export ROSNode,
     warn,
     log_error,
     fatal,
-    set_level,  # from Logging
+    set_level,
     DEBUG,
     INFO,
     WARN,
     ERROR,
-    FATAL
+    FATAL,
+    TransformListener,
+    TransformBroadcaster,
+    StaticTransformBroadcaster,
+    lookup_transform,
+    can_transform,
+    send_transform,
+    send_static_transform,
+    create_transform_stamped # from TF2
 
 end
