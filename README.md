@@ -78,7 +78,7 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 2. Install ROS2.jl:
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/Michi-Tsubaki/ROS2.jl")
+Pkg.add("ROS2")
 ```
 
 3. For component management features:
