@@ -10,7 +10,6 @@ function main()
     println("Creating service client...")
     client = ServiceClient(node, "add_two_ints", "example_interfaces.srv.AddTwoInts")
 
-    # Wait
     println("Waiting for service...")
     if !wait_for_service(client, timeout_sec = 5.0)
         println("Service not available!")
@@ -21,14 +20,10 @@ function main()
 
     try
         while is_ok()
-            # Request
             request = create_request(client)
             request.a = rand(1:100)
             request.b = rand(1:100)
-
             println("\nSending request: a=$(request.a), b=$(request.b)")
-
-            # Call
             response = call(client, request)
             println("Got response: sum=$(response.sum)")
 
