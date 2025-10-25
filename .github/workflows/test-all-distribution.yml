@@ -167,6 +167,26 @@ jobs:
           source /opt/ros/${{ matrix.ros_distro }}/setup.bash
           julia --project=. -e 'using Pkg; Pkg.test()'
         shell: bash
+      - name: Test ROS2 Integration
+        run: |
+          source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          julia --project=. -e '
+          using ROS2
+          init()
+          node = ROSNode("test_node")
+          pub = Publisher(node, "test_topic", "std_msgs.msg.String")
+          msg = create_msg("std_msgs.msg.String")
+          msg.data = "Hello from Julia!"
+          println("Publishing message...")
+          publish(pub, msg)
+          for i = 1:10
+              spin_once(node)
+              sleep(0.1)
+          end
+          shutdown()
+          println("Integration test passed!")
+          '
+        shell: bash
       - name: Upload Coverage
         uses: codecov/codecov-action@v3
         if: success()
