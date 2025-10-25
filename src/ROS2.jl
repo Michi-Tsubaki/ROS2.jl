@@ -13,6 +13,7 @@ include("parameter.jl")
 include("action.jl")
 include("logging.jl")
 include("tf2.jl")
+include("messages.jl")
 
 function __init__()
     if contains(lowercase(get(ENV, "GITHUB_WORKFLOW", "")), "automerge")
@@ -55,6 +56,7 @@ using .Parameter
 using .Action
 using .Logging
 using .TF2
+using .Messages
 
 export ROSNode,
     init,
@@ -129,6 +131,14 @@ export ROSNode,
     can_transform,
     send_transform,
     send_static_transform,
-    create_transform_stamped # from TF2
+    create_transform_stamped, # from TF2
+    get_available_message_types,
+    create_msg_dynamic,
+    get_message_fields,
+    is_valid_message_type,
+    QoSProfile,
+    create_qos_profile,
+    DEFAULT_QOS,
+    SENSOR_DATA_QOS  # from Messages
 
 end
