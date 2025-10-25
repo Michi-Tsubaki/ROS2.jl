@@ -10,11 +10,11 @@ PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 Aqua = "0.8.9"
 Example = "0.5"
 MuJoCo_jll = "2"
+PyCall = "1.96.4"
 ReTestItems = "1.29.0"
 StaticArrays = "1"
 Test = "1"
 julia = "1.10.3"
-PyCall = "1.96.4"
 
 [extras]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
