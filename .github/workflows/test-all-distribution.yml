@@ -150,6 +150,10 @@ jobs:
           arch: x64
       - name: Cache Julia Dependencies
         uses: julia-actions/cache@v2
+      - name: Install Dependencies
+        run: |
+          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+        shell: bash
       - name: Configure PyCall to use system Python
         run: |
           julia --project=. -e '
