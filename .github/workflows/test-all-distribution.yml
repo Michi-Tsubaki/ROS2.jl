@@ -150,6 +150,14 @@ jobs:
           arch: x64
       - name: Cache Julia Dependencies
         uses: julia-actions/cache@v2
+      - name: Configure PyCall to use system Python
+        run: |
+          julia --project=. -e '
+          ENV["PYTHON"] = "/usr/bin/python${{ matrix.python }}"
+          using Pkg
+          Pkg.build("PyCall")
+          '
+        shell: bash
       - name: Set up ROS 2 ${{ matrix.ros }}
         run: |
           sudo apt update
@@ -165,11 +173,13 @@ jobs:
       - name: Run Tests
         run: |
           source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          export AMENT_PREFIX_PATH=/opt/ros/${{ matrix.ros_distro }}
           julia --project=. -e 'using Pkg; Pkg.test()'
         shell: bash
       - name: Test ROS2 Integration
         run: |
           source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          export AMENT_PREFIX_PATH=/opt/ros/${{ matrix.ros_distro }}
           julia --project=. -e '
           using ROS2
           init()
