@@ -10,15 +10,15 @@ end
 function main()
     # Creating node
     node = ROSNode("simple_subscriber")
-    
+
     # Creating subscriber
     sub = Subscriber(node, "hello_topic", "std_msgs.msg.String", callback)
-    
+
     # Starting subscribe loop
     try
         while is_ok()
             # ROS event processing
-            spin_once(node, timeout_sec=0.1)
+            spin_once(node, timeout_sec = 0.1)
             # wait
             sleep(0.1)
         end
