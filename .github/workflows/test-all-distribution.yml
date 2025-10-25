@@ -1,0 +1,128 @@
+name: Comprehensive Test Matrix
+on:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: Julia ${{ matrix.julia }} - ROS ${{ matrix.ros }} - Python ${{ matrix.python }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    permissions:
+      actions: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.10'
+            julia: 'lts'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.10'
+            julia: '1'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.8'
+            julia: '1'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.9'
+            julia: '1'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.11'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.12'
+            julia: 'lts'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.12'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.10'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.11'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.13'
+            julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.10'
+            julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.11'
+            julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.12'
+            julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.13'
+            julia: '1'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ matrix.julia }}
+          arch: x64
+      - name: Cache Julia Dependencies
+        uses: julia-actions/cache@v2
+      - name: Set up ROS 2 ${{ matrix.ros }}
+        run: |
+          sudo apt update
+          sudo apt install -y curl gnupg lsb-release
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
+          sudo apt update
+          sudo apt install -y ros-${{ matrix.ros_distro }}-desktop python3-colcon-common-extensions python3-rosdep python3-vcstool
+      - name: Initialize rosdep
+        run: |
+          sudo rosdep init || true
+          rosdep update
+      - name: Run Tests
+        run: |
+          source /opt/ros/${{ matrix.ros_distro }}/setup.bash
+          julia --project=. -e 'using Pkg; Pkg.test()'
+        shell: bash
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+        if: success()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./lcov.info
+          flags: unittests-${{ matrix.ros }}-python${{ matrix.python }}
+          name: codecov-${{ matrix.ros }}-py${{ matrix.python }}
+          fail_ci_if_error: false
