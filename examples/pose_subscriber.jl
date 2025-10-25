@@ -1,6 +1,5 @@
 #!/usr/bin/env julia
-
-# pose_subscriber.jl
+# This example demonstrates periodic subscribing to multiple message types: Int32 and Pose.
 using ROS2
 
 function int_callback(msg)
@@ -8,17 +7,19 @@ function int_callback(msg)
 end
 
 function pose_callback(msg)
-    println("Received pose: position=($(msg.position.x), $(msg.position.y), $(msg.position.z))")
+    println(
+        "Received pose: position=($(msg.position.x), $(msg.position.y), $(msg.position.z))",
+    )
 end
 
 function main()
     # Creating node
     node = ROSNode("multi_type_subscriber")
-    
+
     # Multiple Subscribers
     int_sub = Subscriber(node, "counter", "std_msgs.msg.Int32", int_callback)
     pose_sub = Subscriber(node, "robot_pose", "geometry_msgs.msg.Pose", pose_callback)
-    
+
     # Starting subscribe loop
     try
         while true

@@ -7,11 +7,15 @@ using ..Core
 mutable struct ActionServer
     pyserver::PyObject
     action_type::PyObject
-    
-    function ActionServer(node::ROSNode, action_name::String, action_type::String,
-                         execute_callback::Function,
-                         goal_callback::Union{Function,Nothing}=nothing,
-                         cancel_callback::Union{Function,Nothing}=nothing)
+
+    function ActionServer(
+        node::ROSNode,
+        action_name::String,
+        action_type::String,
+        execute_callback::Function,
+        goal_callback::Union{Function,Nothing} = nothing,
+        cancel_callback::Union{Function,Nothing} = nothing,
+    )
         py"""
         def create_action_server(node, action_name, action_type_str, execute_cb, goal_cb=None, cancel_cb=None):
             import importlib
@@ -34,8 +38,12 @@ mutable struct ActionServer
             return server, action_class
         """
         pyserver, action_type_obj = py"create_action_server"(
-            node.pynode, action_name, action_type,
-            execute_callback, goal_callback, cancel_callback
+            node.pynode,
+            action_name,
+            action_type,
+            execute_callback,
+            goal_callback,
+            cancel_callback,
         )
         return new(pyserver, action_type_obj)
     end
@@ -45,7 +53,7 @@ end
 mutable struct ActionClient
     pyclient::PyObject
     action_type::PyObject
-    
+
     function ActionClient(node::ROSNode, action_name::String, action_type::String)
         py"""
         def create_action_client(node, action_name, action_type_str):
@@ -65,7 +73,8 @@ mutable struct ActionClient
             )
             return client, action_class
         """
-        pyclient, action_type_obj = py"create_action_client"(node.pynode, action_name, action_type)
+        pyclient, action_type_obj =
+            py"create_action_client"(node.pynode, action_name, action_type)
         return new(pyclient, action_type_obj)
     end
 end
@@ -76,8 +85,11 @@ mutable struct GoalHandle
 end
 
 # Action client helpers
-function send_goal(client::ActionClient, goal::PyObject;
-                  feedback_callback::Union{Function,Nothing}=nothing)
+function send_goal(
+    client::ActionClient,
+    goal::PyObject;
+    feedback_callback::Union{Function,Nothing} = nothing,
+)
     py"""
     def send_goal_async(client, goal, feedback_callback=None):
         return client.send_goal_async(goal, feedback_callback=feedback_callback)
@@ -86,15 +98,18 @@ function send_goal(client::ActionClient, goal::PyObject;
     return future
 end
 
-function send_goal_sync(client::ActionClient, goal::PyObject;
-                       feedback_callback::Union{Function,Nothing}=nothing)
-    future = send_goal(client, goal, feedback_callback=feedback_callback)
+function send_goal_sync(
+    client::ActionClient,
+    goal::PyObject;
+    feedback_callback::Union{Function,Nothing} = nothing,
+)
+    future = send_goal(client, goal, feedback_callback = feedback_callback)
     rclpy.spin_until_future_complete(client.pyclient.node, future)
     goal_handle = future.result()
     if goal_handle === nothing || !goal_handle.accepted
         return nothing
     end
-    
+
     result_future = goal_handle.get_result_async()
     rclpy.spin_until_future_complete(client.pyclient.node, result_future)
     return result_future.result()
@@ -139,9 +154,18 @@ function cancel(goal_handle::GoalHandle)
     goal_handle.pygoal_handle.cancel()
 end
 
-export ActionServer, ActionClient, GoalHandle,
-       send_goal, send_goal_sync, cancel_goal, create_goal,
-       accept_goal, reject_goal, publish_feedback,
-       succeed, abort, cancel
+export ActionServer,
+    ActionClient,
+    GoalHandle,
+    send_goal,
+    send_goal_sync,
+    cancel_goal,
+    create_goal,
+    accept_goal,
+    reject_goal,
+    publish_feedback,
+    succeed,
+    abort,
+    cancel
 
 end # module

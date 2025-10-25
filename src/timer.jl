@@ -22,7 +22,6 @@ mutable struct ROSTimer
     end
 end
 
-# Timer control functions
 function timer_cancel(timer::ROSTimer)
     timer.pytimer.cancel()
 end
@@ -39,7 +38,6 @@ function timer_time_since_last_call(timer::ROSTimer)
     return timer.pytimer.time_since_last_call()
 end
 
-# Export functions
 export ROSTimer, timer_cancel, timer_reset, timer_is_ready, timer_time_since_last_call
 
-end # module
+end

@@ -7,8 +7,8 @@ using ..Core
 mutable struct Publisher
     pypub::PyObject
     msg_type::PyObject
-    
-    function Publisher(node::ROSNode, topic::String, msg_type::String; qos_profile=10)
+
+    function Publisher(node::ROSNode, topic::String, msg_type::String; qos_profile = 10)
         py"""
         def create_publisher(node, topic, msg_type_str, qos_profile):
             import importlib
@@ -28,7 +28,8 @@ mutable struct Publisher
             pub = node.create_publisher(msg_class, topic, qos)
             return pub, msg_class
         """
-        pypub, msg_type_obj = py"create_publisher"(node.pynode, topic, msg_type, qos_profile)
+        pypub, msg_type_obj =
+            py"create_publisher"(node.pynode, topic, msg_type, qos_profile)
         return new(pypub, msg_type_obj)
     end
 end
@@ -36,8 +37,14 @@ end
 # Subscriber wrapper
 mutable struct Subscriber
     pysub::PyObject
-    
-    function Subscriber(node::ROSNode, topic::String, msg_type::String, callback::Function; qos_profile=10)
+
+    function Subscriber(
+        node::ROSNode,
+        topic::String,
+        msg_type::String,
+        callback::Function;
+        qos_profile = 10,
+    )
         py"""
         def create_subscriber(node, topic, msg_type_str, callback, qos_profile):
             import importlib

@@ -19,7 +19,7 @@ function get_parameter(node::ROSNode, name::String)
 end
 
 function set_parameter(node::ROSNode, name::String, value::Any)
-    node.pynode.set_parameter(rclpy.parameter.Parameter(name, value=value))
+    node.pynode.set_parameter(rclpy.parameter.Parameter(name, value = value))
 end
 
 function has_parameter(node::ROSNode, name::String)
@@ -47,8 +47,13 @@ function remove_on_set_parameters_callback(node::ROSNode, handle::PyObject)
     node.pynode.remove_on_set_parameters_callback(handle)
 end
 
-export declare_parameter, declare_parameters, get_parameter, set_parameter,
-       has_parameter, get_parameter_types, add_on_set_parameters_callback,
-       remove_on_set_parameters_callback
+export declare_parameter,
+    declare_parameters,
+    get_parameter,
+    set_parameter,
+    has_parameter,
+    get_parameter_types,
+    add_on_set_parameters_callback,
+    remove_on_set_parameters_callback
 
 end # module

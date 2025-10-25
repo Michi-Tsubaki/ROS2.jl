@@ -47,7 +47,7 @@ function set_level(logger::PyObject, level::Integer)
 end
 
 # Export renamed log_error and other functions
-export get_logger, debug, info, warn, log_error, fatal, set_level,
-       DEBUG, INFO, WARN, ERROR, FATAL
+export get_logger,
+    debug, info, warn, log_error, fatal, set_level, DEBUG, INFO, WARN, ERROR, FATAL
 
 end # module

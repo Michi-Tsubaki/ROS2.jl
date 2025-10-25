@@ -1,13 +1,13 @@
 #!/usr/bin/env julia
-# example_service_server.jl
+# This example demonstrates a simple service server that adds two integers.
 using ROS2
 using PyCall
 
 function add_service_callback(request, response)
     println("Received request: a=$(request.a), b=$(request.b)")
-    
+
     response.sum = request.a + request.b
-    
+
     println("Sending response: sum=$(response.sum)")
     return response
 end
@@ -15,10 +15,15 @@ end
 function main()
     println("Creating node...")
     node = ROSNode("adder_server")
-    
+
     println("Creating service server...")
-    server = ServiceServer(node, "add_two_ints", "example_interfaces.srv.AddTwoInts", add_service_callback)
-    
+    server = ServiceServer(
+        node,
+        "add_two_ints",
+        "example_interfaces.srv.AddTwoInts",
+        add_service_callback,
+    )
+
     println("Service ready...")
     try
         while is_ok()
