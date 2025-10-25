@@ -19,13 +19,8 @@ jobs:
           - ros: humble
             os: ubuntu-22.04
             ros_distro: humble
-            python: '3.10'
+            python: '3.8'
             julia: 'lts'
-          - ros: humble
-            os: ubuntu-22.04
-            ros_distro: humble
-            python: '3.10'
-            julia: '1'
           - ros: humble
             os: ubuntu-22.04
             ros_distro: humble
@@ -35,10 +30,50 @@ jobs:
             os: ubuntu-22.04
             ros_distro: humble
             python: '3.9'
+            julia: 'lts'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.9'
             julia: '1'
           - ros: humble
             os: ubuntu-22.04
             ros_distro: humble
+            python: '3.10'
+            julia: 'lts'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.10'
+            julia: '1'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.11'
+            julia: 'lts'
+          - ros: humble
+            os: ubuntu-22.04
+            ros_distro: humble
+            python: '3.11'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.10'
+            julia: 'lts'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.10'
+            julia: '1'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
+            python: '3.11'
+            julia: 'lts'
+          - ros: jazzy
+            os: ubuntu-24.04
+            ros_distro: jazzy
             python: '3.11'
             julia: '1'
           - ros: jazzy
@@ -54,13 +89,8 @@ jobs:
           - ros: jazzy
             os: ubuntu-24.04
             ros_distro: jazzy
-            python: '3.10'
-            julia: '1'
-          - ros: jazzy
-            os: ubuntu-24.04
-            ros_distro: jazzy
-            python: '3.11'
-            julia: '1'
+            python: '3.13'
+            julia: 'lts'
           - ros: jazzy
             os: ubuntu-24.04
             ros_distro: jazzy
@@ -70,7 +100,17 @@ jobs:
             os: ubuntu-24.04
             ros_distro: rolling
             python: '3.10'
+            julia: 'lts'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.10'
             julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.11'
+            julia: 'lts'
           - ros: rolling
             os: ubuntu-24.04
             ros_distro: rolling
@@ -80,7 +120,17 @@ jobs:
             os: ubuntu-24.04
             ros_distro: rolling
             python: '3.12'
+            julia: 'lts'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.12'
             julia: '1'
+          - ros: rolling
+            os: ubuntu-24.04
+            ros_distro: rolling
+            python: '3.13'
+            julia: 'lts'
           - ros: rolling
             os: ubuntu-24.04
             ros_distro: rolling
