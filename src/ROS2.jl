@@ -14,6 +14,7 @@ include("action.jl")
 include("logging.jl")
 include("tf2.jl")
 include("messages.jl")
+include("advanced.jl")
 
 function __init__()
     if contains(lowercase(get(ENV, "GITHUB_WORKFLOW", "")), "automerge")
@@ -41,6 +42,7 @@ function __init__()
 
         Time.__init_time__()
         TF2.__init_tf2__()
+        Advanced.__init_advanced__()
 
     catch e
         @warn "ROS2 initialization deferred: $e"
@@ -57,6 +59,7 @@ using .Action
 using .Logging
 using .TF2
 using .Messages
+using .Advanced
 
 export ROSNode,
     init,
@@ -139,6 +142,22 @@ export ROSNode,
     QoSProfile,
     create_qos_profile,
     DEFAULT_QOS,
-    SENSOR_DATA_QOS  # from Messages
+    SENSOR_DATA_QOS,  # from Messages
+    LifecycleNode,
+    configure,
+    activate,
+    deactivate,
+    cleanup,
+    shutdown_lifecycle,
+    MultiThreadedExecutor,
+    add_node,
+    spin_executor,
+    shutdown_executor,
+    ComponentManager,
+    load_component,
+    unload_component,
+    list_components,
+    set_domain_id,
+    get_domain_id # from Advanced
 
 end
