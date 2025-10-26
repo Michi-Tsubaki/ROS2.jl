@@ -31,8 +31,8 @@ ROS2.jl is a Julia wrapper for ROS2's Python client library (rclpy), enabling ro
 
 | ROS2.jl Version | ROS2 Version | Julia Version | Python Version |
 |----------------|--------------|---------------|----------------|
-| 0.2.x          | Jazzy, Humble | 1.10, 1.11, 1.12 | 3.12(Jazzy), 3.10(Humble) |
-| 0.1.x          | Jazzy | 1.10, 1.11, 1.12 | 3.12 |
+| 0.2.0          | Jazzy, Humble | 1.10, 1.11, 1.12 | 3.12(Jazzy), 3.10(Humble) |
+| 0.1.5          | Jazzy | 1.10, 1.11, 1.12 | 3.12 |
 
 ## Features
 
